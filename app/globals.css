@@ -1,0 +1,165 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 2%;
+    --foreground: 0 0% 95%;
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 2%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 50%;
+    --accent: 145 80% 52%;
+    --accent-foreground: 0 0% 2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 12%;
+    --input: 0 0% 12%;
+    --ring: 145 80% 52%;
+    --chart-1: 145 80% 52%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+    --sidebar-background: 0 0% 3%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 145 80% 52%;
+    --sidebar-primary-foreground: 0 0% 2%;
+    --sidebar-accent: 0 0% 8%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 0 0% 12%;
+    --sidebar-ring: 145 80% 52%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; filter: blur(60px); }
+  50% { opacity: 0.8; filter: blur(80px); }
+}
+
+@keyframes scan-line {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes fade-in-up {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes letter-spacing-in {
+  0% { letter-spacing: 1em; opacity: 0; }
+  100% { letter-spacing: 0.3em; opacity: 1; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes grid-fade {
+  0%, 100% { opacity: 0.03; }
+  50% { opacity: 0.08; }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+.animate-scan-line {
+  animation: scan-line 8s linear infinite;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 1s ease-out forwards;
+}
+
+.animate-letter-spacing-in {
+  animation: letter-spacing-in 1.5s ease-out forwards;
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
+
+.animate-grid-fade {
+  animation: grid-fade 4s ease-in-out infinite;
+}
+
+.animation-delay-200 { animation-delay: 200ms; }
+.animation-delay-400 { animation-delay: 400ms; }
+.animation-delay-600 { animation-delay: 600ms; }
+.animation-delay-800 { animation-delay: 800ms; }
+.animation-delay-1000 { animation-delay: 1000ms; }
+.animation-delay-1200 { animation-delay: 1200ms; }
+
+@keyframes glitch-fast {
+  0% { transform: translate(0); filter: brightness(1); opacity: 0.1; }
+  
+  /* Movimentos ultra rápidos em 800ms */
+  5% { transform: translate(-8px, 2px); filter: brightness(2); }
+  10% { transform: translate(8px, -2px); filter: brightness(0.5); }
+  15% { transform: translate(-5px, -3px); filter: drop-shadow(4px 0px #00ff00); }
+  20% { transform: translate(5px, 3px); }
+  25% { transform: translate(-10px, 0); filter: brightness(3); }
+  30% { transform: translate(10px, 0); }
+  40% { transform: translate(-2px, 5px); filter: brightness(1.5); }
+  50% { transform: translate(2px, -5px); filter: drop-shadow(-4px 0px #00ff00); }
+  60% { transform: translate(-8px, 1px); }
+  70% { transform: translate(8px, -1px); filter: brightness(2); }
+  80% { transform: translate(-2px, 0); }
+  90% { transform: translate(1px, 0); filter: brightness(1.2); }
+  
+  /* Estabilização total */
+  100% { transform: translate(0); filter: brightness(1); opacity: 1; }
+}
+
+.animate-glitch-once {
+  /* Tempo menor (0.8s) e linear para não desacelerar no meio */
+  animation: glitch-fast 0.8s linear both;
+}
+
+@keyframes glitch-dot {
+  0%, 100% { transform: scale(1); opacity: 0.8; filter: blur(0px); }
+  20% { transform: scale(1.2); opacity: 1; filter: blur(1px); }
+  40% { transform: scale(0.9); opacity: 0.5; }
+  60% { transform: scale(1.1) translate(1px, -1px); opacity: 1; }
+  80% { transform: scale(1); opacity: 0.7; }
+}
+
+.animate-dot-glitch {
+  animation: glitch-dot 2s infinite ease-in-out;
+}
