@@ -79,10 +79,10 @@ export function HeroSection() {
             style={{
               transitionDelay: "2200ms", 
               WebkitMaskImage: isHoverable 
-                ? `radial-gradient(${lightRadius}px at ${mousePosition.x}px ${mousePosition.y}px, transparent 0%, transparent 40%, white 70%)`
+                ? `radial-gradient(${lightRadius}px at ${mousePosition.x}px ${mousePosition.y}px, transparent 0%, transparent 50%, white 100%)`
                 : "none",
               maskImage: isHoverable 
-                ? `radial-gradient(${lightRadius}px at ${mousePosition.x}px ${mousePosition.y}px, transparent 0%, transparent 40%, white 70%)`
+                ? `radial-gradient(${lightRadius}px at ${mousePosition.x}px ${mousePosition.y}px, transparent 0%, transparent 50%, white 100%)`
                 : "none",
               WebkitMaskRepeat: "no-repeat",
               maskRepeat: "no-repeat",
