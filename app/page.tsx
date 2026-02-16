@@ -73,7 +73,7 @@ export default function Page() {
       {/* Inner */}
       <div
         ref={innerRef}
-        className="fixed w-3 h-3 rounded-full pointer-events-none z-30 bg-accent"
+        className="hidden lg:block fixed w-3 h-3 rounded-full pointer-events-none z-30 bg-accent"
         style={{
           transform: "translate3d(-100px, -100px, 0)",
           boxShadow:
@@ -84,7 +84,7 @@ export default function Page() {
       {/* Outer */}
       <div
         ref={outerRef}
-        className="fixed w-6 h-6 rounded-full pointer-events-none z-30"
+        className="hidden lg:block fixed w-6 h-6 rounded-full pointer-events-none z-30"
         style={{
           transform: "translate3d(-100px, -100px, 0)",
           // border: "1.5px solid hsl(145 80% 52% / 0.7)",

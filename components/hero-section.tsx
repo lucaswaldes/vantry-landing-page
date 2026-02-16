@@ -4,30 +4,35 @@ import { useEffect, useRef, useState } from "react"
 
 export function HeroSection() {
   const [mounted, setMounted] = useState(false)
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  // 1. Inicia fora da tela para evitar o ponto de sombra no refresh
+  const [mousePosition, setMousePosition] = useState({ x: -1000, y: -1000 })
+  const [isHoverable, setIsHoverable] = useState(false)
+  
   const titleRef = useRef<HTMLDivElement>(null)
-  const lightRadius = 160 // mesmo valor que você usa no radial-gradient
+  const lightRadius = 160
 
   useEffect(() => {
     setMounted(true)
-const handleMouseMove = (e: MouseEvent) => {
-  if (!titleRef.current) return
 
-  const img = titleRef.current.querySelector('img') as HTMLImageElement
-  if (!img) return
-  const imgRect = img.getBoundingClientRect()
+    // 2. Detecta se o dispositivo suporta hover (Mouse)
+    const canHover = window.matchMedia("(hover: hover)").matches
+    setIsHoverable(canHover)
 
-  // Calcula posição do cursor relativa à imagem
-  const x = e.clientX - imgRect.left
-  const y = e.clientY - imgRect.top
+    if (!canHover) return
 
-  // Ajusta para que o centro da luz fique exatamente no cursor
-  setMousePosition({
-    x: x, // a luz vai girar em torno do cursor
-    y: y,
-  })
-}
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!titleRef.current) return
 
+      const img = titleRef.current.querySelector('img') as HTMLImageElement
+      if (!img) return
+      const imgRect = img.getBoundingClientRect()
+
+      // Calcula posição relativa à imagem
+      const x = e.clientX - imgRect.left
+      const y = e.clientY - imgRect.top
+
+      setMousePosition({ x, y })
+    }
 
     window.addEventListener("mousemove", handleMouseMove)
     return () => window.removeEventListener("mousemove", handleMouseMove)
@@ -46,45 +51,45 @@ const handleMouseMove = (e: MouseEvent) => {
         </span>
       </div>
 
-<div
-  className={`relative opacity-0 ${mounted ? "animate-fade-in-up" : ""}`}
-  style={{ animationDelay: "400ms", animationFillMode: "forwards", width: "100%" }}
->
-  <div 
-    ref={titleRef} 
-    className={mounted ? "animate-glitch-once" : ""}
-    style={{ animationDelay: "2000ms" }} 
-  >
-    {/* Camada base: Fica fixa em 30% para o mouse "esculpir" a sombra sobre ela */}
-    <img
-      src="/vantry-logo.png"
-      alt="VANTRY"
-      className="w-full max-w-[700px] mx-auto opacity-30 select-none"
-      draggable={false}
-    />
+      <div
+        className={`relative opacity-0 ${mounted ? "animate-fade-in-up" : ""}`}
+        style={{ animationDelay: "400ms", animationFillMode: "forwards", width: "100%" }}
+      >
+        <div 
+          ref={titleRef} 
+          className={mounted ? "animate-glitch-once" : ""}
+          style={{ animationDelay: "2000ms" }} 
+        >
+          {/* Camada base: 30% opacidade */}
+          <img
+            src="/vantry-logo.png"
+            alt="VANTRY"
+            className="w-full max-w-[700px] mx-auto opacity-30 select-none"
+            draggable={false}
+          />
 
-    {/* Camada Lanterna (A que apaga com o mouse) */}
-    <img
-      src="/vantry-logo.png"
-      alt=""
-      draggable={false}
-      className={`pointer-events-none absolute inset-0 w-full max-w-[700px] mx-auto select-none transition-opacity duration-1000 ${
-        mounted ? "opacity-100" : "opacity-0"
-      }`}
-      style={{
-        // O delay aqui garante que ela só fique 100% sólida após o glitch
-        transitionDelay: "2200ms", 
-        
-        // MÁSCARA INVERTIDA (O mouse cria a sombra)
-        WebkitMaskImage: `radial-gradient(${lightRadius}px at ${mousePosition.x}px ${mousePosition.y}px, transparent 0%, transparent 40%, white 70%)`,
-        maskImage: `radial-gradient(${lightRadius}px at ${mousePosition.x}px ${mousePosition.y}px, transparent 0%, transparent 40%, white 70%)`,
-        WebkitMaskRepeat: "no-repeat",
-        maskRepeat: "no-repeat",
-      }}
-    />
-  </div>
-</div>
-
+          {/* Camada Lanterna (Só aplica máscara se isHoverable for true) */}
+          <img
+            src="/vantry-logo.png"
+            alt=""
+            draggable={false}
+            className={`pointer-events-none absolute inset-0 w-full max-w-[700px] mx-auto select-none transition-opacity duration-1000 ${
+              mounted ? "opacity-100" : "opacity-0"
+            }`}
+            style={{
+              transitionDelay: "2200ms", 
+              WebkitMaskImage: isHoverable 
+                ? `radial-gradient(${lightRadius}px at ${mousePosition.x}px ${mousePosition.y}px, transparent 0%, transparent 40%, white 70%)`
+                : "none",
+              maskImage: isHoverable 
+                ? `radial-gradient(${lightRadius}px at ${mousePosition.x}px ${mousePosition.y}px, transparent 0%, transparent 40%, white 70%)`
+                : "none",
+              WebkitMaskRepeat: "no-repeat",
+              maskRepeat: "no-repeat",
+            }}
+          />
+        </div>
+      </div>
 
       {/* Accent line */}
       <div
@@ -111,24 +116,19 @@ const handleMouseMove = (e: MouseEvent) => {
         </span>
       </p>
 
-     {/* Countdown / CTA indicator */}
-<div
-  className={`mt-16 flex flex-col items-center gap-4 opacity-0 ${mounted ? "animate-fade-in-up" : ""}`}
-  style={{ animationDelay: "1200ms", animationFillMode: "forwards" }}
->
-  <div className="flex items-center gap-3 font-mono text-xs text-muted-foreground">
-    {/* Container do Ponto com efeito de eco */}
-    <div className="relative flex h-2 w-2">
-      {/* Círculo que expande (Eco) */}
-      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-      
-      {/* Ponto principal com o glitch sutil */}
-      <span className={`relative inline-flex rounded-full h-2 w-2 bg-accent ${mounted ? "animate-dot-glitch" : ""}`}></span>
-    </div>
-    
-    <span className="tracking-[0.2em] uppercase">System initializing</span>
-  </div>
-</div>
+      {/* Countdown / CTA indicator */}
+      <div
+        className={`mt-16 flex flex-col items-center gap-4 opacity-0 ${mounted ? "animate-fade-in-up" : ""}`}
+        style={{ animationDelay: "1200ms", animationFillMode: "forwards" }}
+      >
+        <div className="flex items-center gap-3 font-mono text-xs text-muted-foreground">
+          <div className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+            <span className={`relative inline-flex rounded-full h-2 w-2 bg-accent ${mounted ? "animate-dot-glitch" : ""}`}></span>
+          </div>
+          <span className="tracking-[0.2em] uppercase">System initializing</span>
+        </div>
+      </div>
     </main>
   )
 }
