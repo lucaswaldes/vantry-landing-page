@@ -47,7 +47,7 @@ export function HeroSection() {
         style={{ animationDelay: "200ms", animationFillMode: "forwards" }}
       >
         <span className="font-mono text-xs tracking-[0.3em] text-muted-foreground uppercase">
-          Development Brazilian Company
+          Brazilian Development Company
         </span>
       </div>
 
