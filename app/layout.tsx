@@ -27,7 +27,7 @@ export const metadata = {
   },
   openGraph: {
     title: 'VANTRY | Brazilian Development Company',
-    description: 'Um novo padrão de excelência digital em desenvolvimento. Automação, código e estratégia de elite.',
+    description: 'Criando soluções digitais inteligentes com foco em automação e experiência do usuário.',
     type: 'website',
     images: [
       {
