@@ -47,7 +47,7 @@ export function HeroSection() {
         style={{ animationDelay: "200ms", animationFillMode: "forwards" }}
       >
         <span className="font-mono text-xs tracking-[0.3em] text-muted-foreground uppercase">
-          Development Company
+          Development Brazilian Company
         </span>
       </div>
 
@@ -64,16 +64,16 @@ export function HeroSection() {
           <img
             src="/vantry-logo.png"
             alt="VANTRY"
-            className="w-full max-w-[700px] mx-auto opacity-30 select-none"
+            className="w-full max-w-[650px] mx-auto opacity-30 select-none"
             draggable={false}
           />
 
           {/* Camada Lanterna (Só aplica máscara se isHoverable for true) */}
           <img
-            src="/vantry-logo.png"
+            src="/vantry-logo2.png"
             alt=""
             draggable={false}
-            className={`pointer-events-none absolute inset-0 w-full max-w-[700px] mx-auto select-none transition-opacity duration-1000 ${
+            className={`pointer-events-none absolute inset-0 w-full max-w-[650px] mx-auto select-none transition-opacity duration-1000 ${
               mounted ? "opacity-100" : "opacity-0"
             }`}
             style={{
@@ -112,7 +112,7 @@ export function HeroSection() {
         style={{ animationDelay: "1000ms", animationFillMode: "forwards" }}
       >
         <span className="text-foreground font-medium">
-          Um novo projeto digital em desenvolvimento
+          Um novo projeto digital em <span style={{color: '#20c44a'}}>desenvolvimento</span>
         </span>
       </p>
 
