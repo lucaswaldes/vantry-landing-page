@@ -15,11 +15,11 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: 'VANTRY — Em Breve',
-  description: 'VANTRY chegou para dominar o desenvolvimento web. Em breve.',
+  // description: 'VANTRY chegou para dominar o desenvolvimento web. Em breve.',
 }
 
 export const viewport: Viewport = {
-  themeColor: '#050505',
+  themeColor: '#20c44a',
 }
 
 export default function RootLayout({
