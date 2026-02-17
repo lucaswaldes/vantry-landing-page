@@ -50,116 +50,92 @@
   * {
     @apply border-border;
   }
+
+  @media (hover: hover) and (pointer: fine) {
+    * {
+      cursor: none !important;
+    }
+  }
+
   body {
     @apply bg-background text-foreground;
   }
 }
 
-/* Custom animations */
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-}
-
-@keyframes pulse-glow {
-  0%, 100% { opacity: 0.4; filter: blur(60px); }
-  50% { opacity: 0.8; filter: blur(80px); }
-}
-
-@keyframes scan-line {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(100vh); }
-}
-
+/* Lightweight animations only */
 @keyframes fade-in-up {
-  0% { opacity: 0; transform: translateY(30px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
 
-@keyframes letter-spacing-in {
-  0% { letter-spacing: 1em; opacity: 0; }
-  100% { letter-spacing: 0.3em; opacity: 1; }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
 
-@keyframes grid-fade {
-  0%, 100% { opacity: 0.03; }
-  50% { opacity: 0.08; }
-}
+  0%,
+  100% {
+    opacity: 1;
+  }
 
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 4s ease-in-out infinite;
-}
-
-.animate-scan-line {
-  animation: scan-line 8s linear infinite;
+  50% {
+    opacity: 0;
+  }
 }
 
 .animate-fade-in-up {
-  animation: fade-in-up 1s ease-out forwards;
+  animation: fade-in-up 0.8s ease-out forwards;
 }
 
-.animate-letter-spacing-in {
-  animation: letter-spacing-in 1.5s ease-out forwards;
+
+@keyframes scan-move {
+  0% {
+    top: 25%;
+  }
+
+  100% {
+    top: 72%;
+  }
+}
+
+@keyframes scan-fade {
+  0% {
+    opacity: 0.1;
+  }
+
+  20% {
+    opacity: 0.3;
+  }
+
+  40% {
+    opacity: 0.8;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  60% {
+    opacity: 0.8;
+  }
+
+  80% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-scan-line {
+  animation: scan-move 5s linear infinite, scan-fade 5s linear infinite;
 }
 
 .animate-blink {
   animation: blink 1s step-end infinite;
-}
-
-.animate-grid-fade {
-  animation: grid-fade 4s ease-in-out infinite;
-}
-
-.animation-delay-200 { animation-delay: 200ms; }
-.animation-delay-400 { animation-delay: 400ms; }
-.animation-delay-600 { animation-delay: 600ms; }
-.animation-delay-800 { animation-delay: 800ms; }
-.animation-delay-1000 { animation-delay: 1000ms; }
-.animation-delay-1200 { animation-delay: 1200ms; }
-
-@keyframes glitch-fast {
-  0% { transform: translate(0); filter: brightness(1); opacity: 0.1; }
-  
-  /* Movimentos ultra rápidos em 800ms */
-  5% { transform: translate(-8px, 2px); filter: brightness(2); }
-  10% { transform: translate(8px, -2px); filter: brightness(0.5); }
-  15% { transform: translate(-5px, -3px); filter: drop-shadow(4px 0px #00ff00); }
-  20% { transform: translate(5px, 3px); }
-  25% { transform: translate(-10px, 0); filter: brightness(3); }
-  30% { transform: translate(10px, 0); }
-  40% { transform: translate(-2px, 5px); filter: brightness(1.5); }
-  50% { transform: translate(2px, -5px); filter: drop-shadow(-4px 0px #00ff00); }
-  60% { transform: translate(-8px, 1px); }
-  70% { transform: translate(8px, -1px); filter: brightness(2); }
-  80% { transform: translate(-2px, 0); }
-  90% { transform: translate(1px, 0); filter: brightness(1.2); }
-  
-  /* Estabilização total */
-  100% { transform: translate(0); filter: brightness(1); opacity: 1; }
-}
-
-.animate-glitch-once {
-  /* Tempo menor (0.8s) e linear para não desacelerar no meio */
-  animation: glitch-fast 0.8s linear both;
-}
-
-@keyframes glitch-dot {
-  0%, 100% { transform: scale(1); opacity: 0.8; filter: blur(0px); }
-  20% { transform: scale(1.2); opacity: 1; filter: blur(1px); }
-  40% { transform: scale(0.9); opacity: 0.5; }
-  60% { transform: scale(1.1) translate(1px, -1px); opacity: 1; }
-  80% { transform: scale(1); opacity: 0.7; }
-}
-
-.animate-dot-glitch {
-  animation: glitch-dot 2s infinite ease-in-out;
 }

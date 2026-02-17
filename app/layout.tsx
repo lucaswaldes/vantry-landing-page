@@ -1,46 +1,32 @@
-// app/layout.tsx
+import type { Metadata, Viewport } from 'next'
 import { Space_Grotesk, JetBrains_Mono } from 'next/font/google'
+
 import './globals.css'
 
-const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-sans' })
-const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono' })
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-sans',
+})
 
-export const metadata = {
-  title: 'VANTRY | Brazilian Development Company',
-  description: 'High-level digital development, automation, and strategy. Uma nova era de tecnologia brasileira em construção. System Initializing.',
- 
-  keywords: [
-    'Vantry', 
-    'Desenvolvimento Software', 
-    'Automação', 
-    'Digital Strategy', 
-    'Tech Brazil', 
-    'Bot', 
-    'Bot Discord',
-    'Discord Automation'
-  ],
-  robots: 'index, follow',
-  icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
-  },
-  openGraph: {
-    title: 'VANTRY | Brazilian Development Company',
-    description: 'Criando soluções digitais inteligentes com foco em automação e experiência do usuário.',
-    type: 'website',
-    images: [
-      {
-        url: '/og-image.png', 
-        width: 1200,
-        height: 630,
-        alt: 'Vantry System Initializing',
-      },
-    ],
-  },
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
+})
+
+export const metadata: Metadata = {
+  title: 'VANTRY — Em Breve',
+  description: 'VANTRY chegou para dominar o desenvolvimento web. Em breve.',
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export const viewport: Viewport = {
+  themeColor: '#050505',
+}
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode
+}>) {
   return (
     <html lang="pt-BR">
       <body className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} font-sans antialiased`}>

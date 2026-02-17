@@ -9,11 +9,11 @@ export function FooterBar() {
 
       <div className="flex items-center gap-6">
         <div className="hidden md:flex items-center gap-6 font-mono text-[10px] md:text-xs tracking-[0.2em] text-muted-foreground uppercase">
-          <span>AUTOMATION</span>
+          <span>Strategy</span>
           <span className="text-border">{'/'}</span>
           <span>Code</span>
           <span className="text-border">{'/'}</span>
-          <span>Strategy</span>
+          <span>AUTOMATION</span>
         </div>
         <div className="font-mono text-[10px] md:text-xs tracking-widest text-accent">
           2026

@@ -1,46 +1,17 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 
 export function HeroSection() {
   const [mounted, setMounted] = useState(false)
-  // 1. Inicia fora da tela para evitar o ponto de sombra no refresh
-  const [mousePosition, setMousePosition] = useState({ x: -1000, y: -1000 })
-  const [isHoverable, setIsHoverable] = useState(false)
-  
-  const titleRef = useRef<HTMLDivElement>(null)
-  const lightRadius = 160
 
   useEffect(() => {
     setMounted(true)
-
-    // 2. Detecta se o dispositivo suporta hover (Mouse)
-    const canHover = window.matchMedia("(hover: hover)").matches
-    setIsHoverable(canHover)
-
-    if (!canHover) return
-
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!titleRef.current) return
-
-      const img = titleRef.current.querySelector('img') as HTMLImageElement
-      if (!img) return
-      const imgRect = img.getBoundingClientRect()
-
-      // Calcula posição relativa à imagem
-      const x = e.clientX - imgRect.left
-      const y = e.clientY - imgRect.top
-
-      setMousePosition({ x, y })
-    }
-
-    window.addEventListener("mousemove", handleMouseMove)
-    return () => window.removeEventListener("mousemove", handleMouseMove)
   }, [])
 
   return (
     <main className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 text-center">
-      
+
       {/* Pre-title label */}
       <div
         className={`mb-8 opacity-0 ${mounted ? "animate-fade-in-up" : ""}`}
@@ -51,42 +22,26 @@ export function HeroSection() {
         </span>
       </div>
 
+      {/* Logo with crossfade hover: white (A green) -> all green */}
       <div
         className={`relative opacity-0 ${mounted ? "animate-fade-in-up" : ""}`}
         style={{ animationDelay: "400ms", animationFillMode: "forwards", width: "100%" }}
       >
-        <div 
-          ref={titleRef} 
-          className={mounted ? "animate-glitch-once" : ""}
-          style={{ animationDelay: "2000ms" }} 
-        >
-          {/* Camada base: 30% opacidade */}
-          <img
-            src="/vantry-logo.png"
-            alt="VANTRY"
-            className="w-full max-w-[650px] mx-auto opacity-30 select-none"
-            draggable={false}
-          />
-
-          {/* Camada Lanterna (Só aplica máscara se isHoverable for true) */}
+        <div className="group relative w-full max-w-[650px] mx-auto">
+          {/* Default: vantry-logo2 (white with green A) */}
           <img
             src="/vantry-logo2.png"
-            alt=""
+            alt="VANTRY"
+            className="w-full select-none transition-all duration-700 group-hover:opacity-0"
             draggable={false}
-            className={`pointer-events-none absolute inset-0 w-full max-w-[650px] mx-auto select-none transition-opacity duration-1000 ${
-              mounted ? "opacity-100" : "opacity-0"
-            }`}
-            style={{
-              transitionDelay: "2200ms", 
-              WebkitMaskImage: isHoverable 
-                ? `radial-gradient(${lightRadius}px at ${mousePosition.x}px ${mousePosition.y}px, transparent 0%, transparent 50%, white 100%)`
-                : "none",
-              maskImage: isHoverable 
-                ? `radial-gradient(${lightRadius}px at ${mousePosition.x}px ${mousePosition.y}px, transparent 0%, transparent 50%, white 100%)`
-                : "none",
-              WebkitMaskRepeat: "no-repeat",
-              maskRepeat: "no-repeat",
-            }}
+          />
+          {/* Hover: vantry-logo (all green) - overlaid on top */}
+          <img
+            src="/vantry-logo.png"
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full select-none opacity-0 transition-all duration-700 group-hover:opacity-100 group-hover:drop-shadow-[0_0_40px_hsl(145,80%,52%,0.4)]"
+            draggable={false}
           />
         </div>
       </div>
@@ -111,12 +66,10 @@ export function HeroSection() {
         className={`mt-6 max-w-md text-sm md:text-base leading-relaxed text-muted-foreground opacity-0 ${mounted ? "animate-fade-in-up" : ""}`}
         style={{ animationDelay: "1000ms", animationFillMode: "forwards" }}
       >
-        <span className="text-foreground font-medium">
-          Um novo projeto digital em <span style={{color: '#20c44a'}}>desenvolvimento</span>
-        </span>
+        <span className="text-foreground font-medium">Um novo projeto digital em <span style={{ color: '#20c44a' }}>desenvolvimento</span></span>
       </p>
 
-      {/* Countdown / CTA indicator */}
+      {/* Status indicator */}
       <div
         className={`mt-16 flex flex-col items-center gap-4 opacity-0 ${mounted ? "animate-fade-in-up" : ""}`}
         style={{ animationDelay: "1200ms", animationFillMode: "forwards" }}
@@ -124,7 +77,7 @@ export function HeroSection() {
         <div className="flex items-center gap-3 font-mono text-xs text-muted-foreground">
           <div className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-            <span className={`relative inline-flex rounded-full h-2 w-2 bg-accent ${mounted ? "animate-dot-glitch" : ""}`}></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
           </div>
           <span className="tracking-[0.2em] uppercase">System initializing</span>
         </div>
