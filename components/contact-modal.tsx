@@ -48,9 +48,9 @@ const modalContent = {
     tag: "WA",
     title: "WhatsApp",
     subtitle: "Fale conosco diretamente",
-    value: "+55 (11) 98503-8413",
+    value: "+55 (11) 91691-5044",
     buttonLabel: "Iniciar conversa",
-    href: "https://wa.me/5511985038413?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20VANTRY%20e%20gostaria%20de%20saber%20mais!",
+    href: "https://wa.me/5511916915044?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20VANTRY%20e%20gostaria%20de%20saber%20mais!",
   },
   email: {
     tag: "EM",
