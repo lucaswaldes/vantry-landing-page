@@ -63,7 +63,7 @@ const modalContent = {
   discord: {
     tag: "DC",
     title: "Discord",
-    subtitle: "Suporte via ticket no servidor",
+    subtitle: "Atendimento via ticket no servidor",
     value: "discord.gg/Ak2CDY8wBP",
     buttonLabel: "Entrar no servidor",
     href: "https://discord.gg/Ak2CDY8wBP",

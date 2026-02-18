@@ -54,9 +54,10 @@ const socialLinks = [
 type ContactType = "discord" | "whatsapp" | "email"
 
 const contactLinks: { icon: React.ComponentType<{ className?: string }>; label: string; tag: string; type: ContactType }[] = [
-  { icon: DiscordIcon, label: "Discord", tag: "DC", type: "discord" },
-  { icon: WhatsAppIcon, label: "WhatsApp", tag: "WA", type: "whatsapp" },
   { icon: MailIcon, label: "E-mail", tag: "EM", type: "email" },
+  { icon: WhatsAppIcon, label: "WhatsApp", tag: "WA", type: "whatsapp" },
+  { icon: DiscordIcon, label: "Discord", tag: "DC", type: "discord" },
+
 ]
 
 export function SideLinks() {
@@ -103,7 +104,7 @@ export function SideLinks() {
           className={`font-mono text-[9px] tracking-[0.3em] text-muted-foreground uppercase mb-3 opacity-0 ${mounted ? "animate-fade-in-up" : ""}`}
           style={{ animationDelay: "1400ms", animationFillMode: "forwards" }}
         >
-          Contato
+          Contact
         </span>
         <div className="w-px h-6 bg-border mb-3" />
         {contactLinks.map((link, i) => (
